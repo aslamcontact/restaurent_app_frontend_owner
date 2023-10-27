@@ -1,1 +1,175 @@
-<p>add-category works!</p>
+
+<div
+  class="modal mt-5"
+  tabindex="-1"
+  role="dialog"
+  [ngStyle]="{'display':displayStyle}"> 
+
+  <div class="modal-dialog modal-lg" role="document"> 
+    <div class="modal-content bg-light"> 
+        <div class="modal-header bg-secondary text-white"> 
+           <h3 class="modal-title mt-1 text-white">NEW CATAGORY</h3> 
+        </div> 
+      <div class="modal-body"> 
+        
+        
+          <form  #addCategoryForm="ngForm"  (ngSubmit)="addCategory()">
+          
+            <div  class="form-group row mt-2" >
+                <div class="col-12">
+                   <input type="text"
+                          class="form-control"
+                          [(ngModel)]="addNewCategory.categoryName"
+                          id="categoryName"
+                          name="categoryName"
+                          #categoryName="ngModel"
+                          placeholder="Category Name"
+                          required
+                          />
+                      
+                </div>
+
+
+                <div *ngIf="categoryName.invalid && (categoryName.dirty||categoryName.touched)">
+
+                  <div *ngIf="categoryName.errors" class="text-danger">
+                     please enter category name
+                  </div>
+ 
+             </div>
+                
+            </div>
+              
+               <div class="row mt-4 text-dark text-center mb-1" >
+                <h5 class="col-12">EACH CATEGORY ATLEAST HAVE ONE PRODUCT </h5>
+              </div>
+            
+             <div class="form-group row mb-3" >
+              
+              <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 p-2">
+                 
+                 <input type="text"
+                        class="form-control" 
+                        [(ngModel)]="addNewCategory.productName"
+                          id="productName"
+                          name="productName"
+                          #productName="ngModel"
+                          placeholder="Product Name"
+                          required         
+                        >
+              </div>
+              <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 p-2">
+                <div class="input-group">
+                  <input type="number" 
+                         class="form-control" 
+                          (ngModel)="addNewCategory.productPrice"
+                         id="productPrice"
+                         name="productPrice"
+                         #productPrice="ngModel"
+                         placeholder="Product Price"
+                         required
+                         >
+                  <div class="input-group-append">
+                    <span class="input-group-text">.0 &#8377;</span>
+                    
+                  </div>
+                </div>
+               </div>
+           <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 p-2">
+            <div class="input-group">
+            <input type="number"
+                   class="form-control" 
+                    (ngModel)="addNewCategory.productQty"
+                   id="productQuantity"
+                   name="productQuantity"
+                   #productQuantity="ngModel"
+                  placeholder="Product Quantity"
+                  required
+                   >
+                   <div class="input-group-append">
+                    <span class="input-group-text">Qty</span>
+                    
+                  </div>
+              </div>
+
+           </div>
+
+
+          
+           <div class="text-danger">{{apiError}}</div>
+           
+            <div *ngIf="isCategoryReq"  class="text-center">
+              <div class="spinner-border" role="status">
+                 <span class="sr-only"></span>
+            </div>
+            
+           
+           </div>
+
+           <div *ngIf="isCategorySuccess" class="text-success">success</div>
+
+           <div class="row mt-3" *ngIf="(productName.invalid && categoryName.valid)&& 
+                                        (productName.dirty||productName.touched)">
+              <div *ngIf="productName.errors" class="text-danger">
+                please enter product name 
+              </div>
+           </div>
+
+           <div class="row mt-3" *ngIf="( productPrice.invalid && 
+                                          productName.valid &&
+                                          categoryName.valid ) && 
+                                        (productPrice.dirty||productPrice.touched)">
+              <div *ngIf="productPrice.errors" class="text-danger">
+                 please enter product price (eg:450)
+              </div>
+          </div>
+
+          <div class="row mt-3" *ngIf="( productQuantity.invalid && 
+                                         productPrice.valid && 
+                                          
+                                         categoryName.valid) &&
+                                       (productQuantity.dirty||productQuantity.touched)">
+              <div *ngIf="productQuantity.errors" class="text-danger">
+                please enter  product quantity (eg: 4)
+              </div>
+          </div>
+
+            </div>  
+            
+
+            
+           <div class="modal-footer row mt-3"> 
+
+              
+                <button type="reset" #clear
+                        class="btn btn-danger col-3" 
+                        (click)="closePopup()"> 
+                    Close 
+                </button> 
+      
+              
+                <button type="submit" 
+                        [disabled]="!addCategoryForm.valid"
+                        class="btn btn-success col-3 pt-2">
+                        Add
+                </button>
+                  
+      
+         </div> 
+        
+
+
+
+          </form>
+  
+      </div> 
+     
+
+    
+    </div> 
+  </div> 
+</div>
+
+
+
+

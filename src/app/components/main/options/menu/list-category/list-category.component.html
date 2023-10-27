@@ -1,0 +1,63 @@
+
+<div class="sticky-top">
+
+    <div class="container-fluid">   
+
+       
+      
+       <div class="overflow-auto  row flex-row mt-1 flex-nowrap  ">
+
+             
+
+           <div class="card  m-1  mb-3 btn btn-outline-warning  card-color" 
+                style="width: 11em;height: 15em; border-radius: 100;" 
+                (click)="openPopup()">
+          
+                <p class="text-center h1 pt-5 " >
+                         +        
+                </p>                      
+            </div>
+
+        
+          
+           <div class="card  btn btn-outline-light  mb-3 m-1 card-color"  
+                style="width: 11em;height: 15em; border-radius: 100;"
+                *ngFor="let category of listOfCategory">
+                <div class="row">
+                    <div class="col-8"></div>
+                    <div class="col-4">
+                      <app-remove-category 
+                      [categoryName]="category.getCategoryName()"
+                      (categoryRemoved)="apiCall()">
+                      </app-remove-category>
+                    </div>
+
+                </div>
+
+                 <div class="text-center m-1">
+                     
+                        
+                                     
+                     <img class="card-img-top img pb-1"  height="60" weight="30" 
+                          [src]="menuApi.getImage(category.getCategoryName(),'main')"
+                          alt="Card image cap">
+                     <h2 class='text-dark text-nowrap'>{{category.getCategoryName()}}</h2>
+                       
+                 </div>
+                
+                      <app-add-image></app-add-image>
+                                            
+                                           
+           </div>
+
+           <div class="text-secondary mt-5 p-3" *ngIf="listOfCategory.length<=0">Empty Add New Category</div>
+       </div>       
+    </div>  
+    
+    
+</div>
+
+
+    <app-add-category [displayStyle]="displayStyle" (displayClose)="closePopup($event)"></app-add-category>
+
+

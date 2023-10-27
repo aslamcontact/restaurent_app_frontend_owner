@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { AddCategoryComponent } from './add-category/add-category.component';
+
 
 @Component({
   selector: 'app-menu',
@@ -6,5 +8,23 @@ import { Component } from '@angular/core';
   styleUrls: ['./menu.component.css']
 })
 export class MenuComponent {
+
+  
+  
+  constructor() {}
+
+  displayStyle:String = "none"; 
+
+  openPopup() { 
+  
+    this.displayStyle = "block"; 
+    
+  } 
+
+
+  
+  
+
+
 
 }
