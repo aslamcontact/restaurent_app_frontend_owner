@@ -11,16 +11,18 @@ export class MenuApiService {
   
   private shopName:string="testproduct1"
 
+  constructor(private http:HttpClient) { }  
+
     getShopName()
     {
        return this.shopName
     }
-   constructor(private http:HttpClient) { }    
+    
                          
       
   setCategory(body:any)
   {
-    let path:string="http://194.163.40.229:8088/api/v1/product/single";
+    let path:string=this.url+"single";
     const headers = {'Content-Type':'application/json'};
       
              return   this.http
@@ -31,7 +33,7 @@ export class MenuApiService {
   }
   removeCategory(categoryName:String)
   {
-    let path:string="http://194.163.40.229:8088/api/v1/product/"+categoryName+"/"+this.shopName;
+    let path:string=this.url+(categoryName as string)+"/"+this.shopName;
     console.log(path)
     return   this.http
     .delete<any>(encodeURI(path))
@@ -41,7 +43,7 @@ export class MenuApiService {
 
   getAllCategory():any
   {
-    let path:string="http://194.163.40.229:8088/api/v1/product/filter/"+this.shopName;
+    let path:string=this.url+"filter/"+this.shopName;
          
     
         console.log(path)
