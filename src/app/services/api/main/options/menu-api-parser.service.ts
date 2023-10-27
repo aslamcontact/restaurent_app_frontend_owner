@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { MenuApiService } from './menu-api.service';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,7 @@ import { Injectable } from '@angular/core';
 
 export class MenuApiParserService {
 
-  constructor() { }
+  constructor(public menuApi:MenuApiService) { }
 
 
   apiToCategory(body:any):Category
@@ -36,7 +37,7 @@ export class MenuApiParserService {
        let cat:CategoriesInterface[]=[]
        
        let body =  { name : '',
-                     brand : 'testproduct1',
+                     brand : this.menuApi.getShopName(),
                      descriptions : [ ],
                      about : {},
                      categoryName : '',

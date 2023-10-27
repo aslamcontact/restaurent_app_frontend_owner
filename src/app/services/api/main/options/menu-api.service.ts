@@ -10,6 +10,11 @@ export class MenuApiService {
   //"http://194.163.40.229:8088/api/v1/product/image/biryani/costal/"+this.productName
   
   private shopName:string="testproduct1"
+
+    getShopName()
+    {
+       return this.shopName
+    }
    constructor(private http:HttpClient) { }    
                          
       
