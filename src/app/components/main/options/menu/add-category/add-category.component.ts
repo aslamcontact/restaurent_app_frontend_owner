@@ -37,7 +37,7 @@ export class AddCategoryComponent {
 
 
   closePopup() {  
-    
+         this.apiError=''
          this.isCategorySuccess=false
          this.displayClose.emit('none')
           this.clear.nativeElement.click()
@@ -74,6 +74,7 @@ export class AddCategoryComponent {
   private menuCategoryReqPocessing(response:any)
   {
     
+     this.apiError=''
      
      let testCategory:Category=this.parser.apiToCategory(response)
      this.testOut=JSON.stringify(testCategory)
@@ -85,6 +86,7 @@ export class AddCategoryComponent {
    {
   
     this.apiError=exception.apiErrorMessage()
+    this.isCategoryReq=false
     
    }     
   
