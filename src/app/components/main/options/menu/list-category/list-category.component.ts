@@ -1,5 +1,5 @@
 import { JsonPipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Output,EventEmitter } from '@angular/core';
 import { Category, MenuApiParserService } from 'src/app/services/api/main/options/menu-api-parser.service';
 import { MenuApiService } from 'src/app/services/api/main/options/menu-api.service';
 
@@ -9,6 +9,8 @@ import { MenuApiService } from 'src/app/services/api/main/options/menu-api.servi
   styleUrls: ['./list-category.component.css']
 })
 export class ListCategoryComponent {
+
+  @Output() triggerListProduct=new EventEmitter<String>()
 
   displayStyle:String = "none"; 
   listOfCategory:Category[]=[]
@@ -37,6 +39,10 @@ export class ListCategoryComponent {
   apiCall()
   {
     this.menuApi.getAllCategory().subscribe(this.allCategoryReq)
+  }
+  sentToListCategory(categoryName:String)
+  {
+    this.triggerListProduct.emit(categoryName)
   }
 
 

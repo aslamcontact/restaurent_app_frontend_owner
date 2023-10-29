@@ -22,7 +22,8 @@
           
            <div class="card  btn btn-outline-light  mb-3 m-1 card-color"  
                 style="width: 11em;height: 15em; border-radius: 100;"
-                *ngFor="let category of listOfCategory">
+                *ngFor="let category of listOfCategory"
+                 (click)="sentToListCategory(category.getCategoryName())">
                 <div class="row">
                     <div class="col-8"></div>
                     <div class="col-4">
@@ -45,7 +46,9 @@
                        
                  </div>
                 
-                      <app-add-image></app-add-image>
+                      <app-add-image 
+                        [categoryName]="category.getCategoryName()"
+                        [imageName]="'main'"></app-add-image>
                                             
                                            
            </div>

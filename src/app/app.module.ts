@@ -19,6 +19,7 @@ import {  HttpClientModule } from '@angular/common/http';
 import { MenuApiParserService } from './services/api/main/options/menu-api-parser.service';
 import { ListCategoryComponent } from './components/main/options/menu/list-category/list-category.component';
 import { AddImageComponent } from './components/main/options/menu/add-image/add-image.component';
+import { ListProductsComponent } from './components/main/options/menu/list-products/list-products.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { AddImageComponent } from './components/main/options/menu/add-image/add-
     AddCategoryComponent,
     RemoveCategoryComponent,
     ListCategoryComponent,
-    AddImageComponent
+    AddImageComponent,
+    ListProductsComponent
   ],
   imports: [
     BrowserModule,

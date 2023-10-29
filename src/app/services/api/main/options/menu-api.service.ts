@@ -7,9 +7,10 @@ import { catchError, throwError } from 'rxjs';
 export class MenuApiService {
 
   private url:String="http://194.163.40.229:8088/api/v1/product/"
+ // private url:String="http://localhost:8080/api/v1/product/"
   //"http://194.163.40.229:8088/api/v1/product/image/biryani/costal/"+this.productName
   
-  private shopName:string="testproduct1"
+  private shopName:string="server"
 
   constructor(private http:HttpClient) { }  
 
@@ -54,11 +55,10 @@ export class MenuApiService {
 
   }
   
-   getProductAll( shopName:String,
-                  category:String
-                ) 
+   getProductsByCategory(category:String) 
        {
-         let path:string=""+this.url+category+"/"+shopName as string;
+        //http://194.163.40.229:8088/api/v1/product/gravy/testproduct1
+         let path:string=""+this.url+category+"/"+this.shopName as string;
          console.log(path)
              return this.http
                          .get(encodeURI(path))
@@ -75,7 +75,46 @@ export class MenuApiService {
          return path
        }
     
-        
+       setImage( category:String,
+                 imageName:String,
+                 body:FormData)
+       {
+       // 'http://194.163.40.229:8088/api/v1/product/image/category/shopname/image'
+       
+          let path:string=this.url+"image/"+category+"/"+this.shopName+"/"+imageName;                                                        
+             return   this.http
+                    .post<any>(encodeURI(path),body)
+                    .pipe( catchError(this.handleError) );
+
+          
+
+       }
+       
+
+       updateImage( category:String,
+                    imageName:String,
+                    body:FormData)
+         {
+             // 'http://194.163.40.229:8088/api/v1/product/image/category/shopname/image'
+
+             let path:string=this.url+"image/"+category+"/"+this.shopName+"/"+imageName;
+ 
+                return   this.http
+                             .put<any>(encodeURI(path),body)
+                             .pipe(catchError(this.handleError));
+
+         } 
+
+       getAssignedImage( category:String)
+       {
+         //'http://194.163.40.229:8088/api/v1/product/image/assigned/biryani/testproduct'
+        let Path:string=this.url+"image/assigned/"+category+"/"+this.shopName
+         return this.http
+                .get<any>(encodeURI(Path))
+                .pipe(catchError(this.handleError))
+ 
+       }
+
 
 
        private handleError(error: HttpErrorResponse)
