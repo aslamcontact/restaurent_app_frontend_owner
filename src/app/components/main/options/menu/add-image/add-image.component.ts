@@ -1,4 +1,4 @@
-import { Component,Input } from '@angular/core';
+import { Component,EventEmitter,Input,Output } from '@angular/core';
 import { MenuApiService } from 'src/app/services/api/main/options/menu-api.service';
 
 @Component({
@@ -10,9 +10,12 @@ export class AddImageComponent {
 
   @Input() categoryName:String="";
   @Input() imageName:String=""
+  @Output() isSetImage:any=new EventEmitter()
   displayStyle:String = "none";
   fileToUpload:any;
-
+  apiError:String=""
+  isNewImage:boolean=true
+  isSetImageRed:boolean=false
   setImageReq:any= {  next:(response:any) =>this.setImageReqPocessing(response),                                                                      
                       error:(error:any) =>this.setImageReqError(error),
                       complete:()=>this.setImageReqComplete()}
@@ -37,6 +40,7 @@ export class AddImageComponent {
    openPopup() { 
   
     this.displayStyle = "block"; 
+    this.checkAssigned()
     
   } 
 
@@ -47,30 +51,45 @@ export class AddImageComponent {
    }
 
    onSaveFile() {
+    this.isSetImageRed=true
     const formData: FormData = new FormData();
     formData.append('image', this.fileToUpload);
     
     this.menuApi.setImage(this.categoryName,this.imageName,formData).subscribe(this.setImageReq)
     }
+
+    onUpdateFile() {
+      this.isSetImageRed=true
+      const formData: FormData = new FormData();
+      formData.append('image', this.fileToUpload);
+      
+      this.menuApi.updateImage(this.categoryName,this.imageName,formData).subscribe(this.setImageReq)
+      }
+
    checkAssigned()
    {
       this.menuApi.getAssignedImage(this.categoryName).subscribe(this.getAssignedImageReq)
+       this.isSetImageRed=true
    }
 
 
  private setImageReqPocessing(response:any)
   {
-                
+             
     console.log(JSON.stringify(response))   
   }
                       
   private setImageReqError(exception:any)
    {
+    this.isSetImageRed=false
     console.log("api error "+exception)
+    this.apiError="Try Again Later"
    }     
   private setImageReqComplete()
   {
-    console.log("api completes ")
+    this.isSetImageRed=false
+    this.isSetImage.emit()
+    this.closePopup()
         
   }
 
@@ -78,18 +97,23 @@ export class AddImageComponent {
 
 private getAssignedImageReqPocessing(response:any)
 {
-              
+   response.forEach((imgName:any) => {
+    
+    if(imgName===this.imageName)this.isNewImage=false
+   });
   console.log(JSON.stringify(response))   
 }
                     
 private getAssignedImageReqError(exception:any)
  {
   console.log("api error "+exception)
+  
  }     
 private getAssignedImageReqComplete()
 {
+  this.isSetImageRed=false
   console.log("api completes ")
-      
+  console.log(this.isNewImage)    
 }
 
 }

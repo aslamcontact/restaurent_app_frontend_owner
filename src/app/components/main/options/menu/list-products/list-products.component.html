@@ -11,7 +11,8 @@
                         </div>
                         <app-add-image 
                         [categoryName]="categoryName"
-                        [imageName]="product.getProductName()"></app-add-image>
+                        [imageName]="product.getProductName()"
+                        (isSetImage)="apiCall(categoryName)"></app-add-image>
                      </div>
                     
                 </div>

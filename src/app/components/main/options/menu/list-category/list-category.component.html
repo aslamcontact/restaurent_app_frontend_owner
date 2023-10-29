@@ -48,7 +48,8 @@
                 
                       <app-add-image 
                         [categoryName]="category.getCategoryName()"
-                        [imageName]="'main'"></app-add-image>
+                        [imageName]="'main'"
+                        (isSetImage)="apiCall()"></app-add-image>
                                             
                                            
            </div>
