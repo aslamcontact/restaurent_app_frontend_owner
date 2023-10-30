@@ -32,6 +32,18 @@ export class MenuApiService {
 
 
   }
+
+  updateCategory(body:any)
+  {
+    let path:string=this.url+"single";
+    const headers = {'Content-Type':'application/json'};
+      
+             return   this.http
+                    .put<any>(encodeURI(path),body,{headers})
+                    .pipe( catchError(this.setCategoryhandler) );
+
+
+  }
   removeCategory(categoryName:String)
   {
     let path:string=this.url+(categoryName as string)+"/"+this.shopName;
