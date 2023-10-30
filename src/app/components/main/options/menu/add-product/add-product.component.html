@@ -1,0 +1,168 @@
+
+<div
+  class="modal mt-5"
+  tabindex="-1"
+  role="dialog"
+  [ngStyle]="{'display':displayStyle}"> 
+
+  <div class="modal-dialog modal-lg" role="document"> 
+    <div class="modal-content bg-light text-center text-muted  "> 
+      <div class="row mt-3">
+          <div class="col-10 mt-4 h3"> 
+            {{category?.getCategoryName()?.charAt(0)?.toUpperCase()}}{{category?.getCategoryName()?.slice(1)}}
+          </div> 
+          <div class="col-2">
+            <div (click)="closePopup()" class="btn text-dark btn-outline-muted "
+            style="font-size:x-large;">
+              &times;
+            </div>
+          </div> 
+      </div>
+        
+        <hr class="hr" />
+      <div class="modal-body"> 
+     
+      
+
+          <form  #addProductForm="ngForm"  (ngSubmit)="addProduct()">
+            
+            
+            
+            <div *ngIf="isProdutReq"  class="text-center">
+              <div class="spinner-border" role="status">
+                <span class="sr-only"></span>
+               </div>        
+           </div>  
+   
+
+
+               
+            
+             <div *ngIf="!isProdutReq" class="form-group row mb-3" >
+              
+              <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 p-2">
+                 
+                 <input type="text"
+                        class="form-control" 
+                        [(ngModel)]="addNewProduct.productName"
+                          id="productName"
+                          name="productName"
+                          #productName="ngModel"
+                          placeholder="Product Name"
+                          required         
+                        >
+                        <div class="row mt-3" *ngIf="( productName.invalid &&
+                                                       (productName.dirty||
+                                                        productName.touched))">
+                            <div *ngIf="productName.errors" class="text-danger ">
+                               Please enter product name 
+                            </div>
+                        </div>
+
+              </div>
+              <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 p-2">
+                <div class="input-group">
+                  <input type="number" 
+                         class="form-control" 
+                          [(ngModel)]="addNewProduct.productPrice"
+                         id="productPrice"
+                         name="productPrice"
+                         #productPrice="ngModel"
+                         placeholder="Product Price"
+                         required
+                         >
+                  <div class="input-group-append">
+                    <span class="input-group-text">.0 &#8377;</span>
+                    
+                  </div>
+                </div>
+
+                <div class="row mt-3" *ngIf="((productName.valid && productPrice.invalid) &&                                             
+                                              (productPrice.dirty|| productPrice.touched))">
+                   <div *ngIf="productPrice.errors" class="text-danger">
+                      please enter product price (eg:450) 
+                   </div>
+                </div>
+               </div>
+           <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 p-2">
+            <div class="input-group">
+            <input type="number"
+                   class="form-control" 
+                    [(ngModel)]="addNewProduct.productQty"
+                   id="productQuantity"
+                   name="productQuantity"
+                   #productQuantity="ngModel"
+                  placeholder="Product Quantity"
+                  required
+                   >
+                   <div class="input-group-append">
+                    <span class="input-group-text">Qty</span>
+                    
+                  </div>
+              </div>
+
+              <div class="row mt-3" *ngIf="(( productName.valid && 
+                                              productPrice.valid && 
+                                              productQuantity.invalid)
+                                               &&
+                                              (productQuantity.dirty||productQuantity.touched)
+                                             )">
+                  <div *ngIf="productQuantity.errors" class="text-danger">
+                      Please enter  product quantity (eg: 4) 
+                  </div>
+              </div>
+
+           </div>
+
+
+          
+           <div class="text-danger">{{apiError}}</div>
+           
+           
+            
+           
+           </div>
+
+           <div *ngIf="isProductResSuccess" class="text-success">
+            {{addNewProduct.productName}} is added successfully
+           </div>
+
+            
+
+            
+           <div class="modal-footer row mt-3"> 
+
+              
+                <button type="reset" #clear
+                        class="btn btn-danger col-3" 
+                        (click)="closePopup()"
+                        [hidden]="true"> 
+                    Close 
+                </button> 
+      
+              
+                <button type="submit" 
+                        [disabled]="!addProductForm.valid||isProdutReq"
+                        class="btn btn-success col-3 pt-2">
+                        Add
+                </button>
+                  
+      
+         </div> 
+        
+
+
+
+          </form>
+  
+      </div> 
+     
+
+    
+    </div> 
+  </div> 
+</div>
+
+
+
+

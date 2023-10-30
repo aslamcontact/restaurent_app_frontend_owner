@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { Category, MenuApiParserService, Product } from 'src/app/services/api/main/options/menu-api-parser.service';
 import { MenuApiService } from 'src/app/services/api/main/options/menu-api.service';
 
@@ -8,6 +8,8 @@ import { MenuApiService } from 'src/app/services/api/main/options/menu-api.servi
   styleUrls: ['./list-products.component.css']
 })
 export class ListProductsComponent {
+  @Output() triggerList=new EventEmitter<String>()
+  displayStyle:String = "none";
 
   category:Category|null=null
   categoryName:String=""
@@ -20,6 +22,17 @@ export class ListProductsComponent {
               public parser:MenuApiParserService)
   {
     
+  }
+
+  openPopup() { 
+  
+    this.displayStyle = "block"; 
+    
+  } 
+  closePopup(event:any)
+  {
+    this.displayStyle=event
+    this.apiCall(this.categoryName)
   }
 
   apiCall(category:String)

@@ -20,6 +20,7 @@ import { MenuApiParserService } from './services/api/main/options/menu-api-parse
 import { ListCategoryComponent } from './components/main/options/menu/list-category/list-category.component';
 import { AddImageComponent } from './components/main/options/menu/add-image/add-image.component';
 import { ListProductsComponent } from './components/main/options/menu/list-products/list-products.component';
+import { AddProductComponent } from './components/main/options/menu/add-product/add-product.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { ListProductsComponent } from './components/main/options/menu/list-produ
     RemoveCategoryComponent,
     ListCategoryComponent,
     AddImageComponent,
-    ListProductsComponent
+    ListProductsComponent,
+    AddProductComponent
   ],
   imports: [
     BrowserModule,
