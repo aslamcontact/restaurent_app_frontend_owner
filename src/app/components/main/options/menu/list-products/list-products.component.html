@@ -16,8 +16,19 @@
       
       </div>
       
-                <div  class="col-xs-4 col-sm-3 col-md-2 col-lg-2 card  bg-light  text-dark m-1" *ngFor="let product of productList">       
-                    <img class="card-img-top img mt-3"  height="200em" width="250em" 
+                <div  class="col-xs-4 col-sm-3 col-md-2 col-lg-2 card  bg-light  text-dark m-1" 
+                      *ngFor="let product of productList"> 
+
+                      <div class="row mt-1">
+                          <div class="col-10"></div>
+                          <div class="col-2">                         
+                               <app-remove-product [category]="category" 
+                                                   [productToDelete]="product.getProductName()"
+                                                   (productRemoved)="apiCall(categoryName)">
+                               </app-remove-product>
+                          </div>
+                      </div>      
+                    <img class="card-img-top img mt-1"  height="200em" width="250em" 
                          [src]="menuApi.getImage(categoryName,product.getProductName())" alt="Card image cap">
                      <div class="card-body">
                        <h3 class="card-title">{{product.getProductName()}}</h3>

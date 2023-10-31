@@ -21,6 +21,7 @@ import { ListCategoryComponent } from './components/main/options/menu/list-categ
 import { AddImageComponent } from './components/main/options/menu/add-image/add-image.component';
 import { ListProductsComponent } from './components/main/options/menu/list-products/list-products.component';
 import { AddProductComponent } from './components/main/options/menu/add-product/add-product.component';
+import { RemoveProductComponent } from './components/main/options/menu/remove-product/remove-product.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { AddProductComponent } from './components/main/options/menu/add-product/
     ListCategoryComponent,
     AddImageComponent,
     ListProductsComponent,
-    AddProductComponent
+    AddProductComponent,
+    RemoveProductComponent
   ],
   imports: [
     BrowserModule,
