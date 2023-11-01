@@ -42,7 +42,10 @@ export class AddCategoryComponent {
          this.displayClose.emit('none')
           this.clear.nativeElement.click()
          
-         
+         this.addNewCategory.productName=""
+         this.addNewCategory.categoryName=""
+         this.addNewCategory.productPrice=0
+         this.addNewCategory.productQty=0
   
           } 
 
