@@ -13,7 +13,7 @@ export class ListProductsComponent {
   category:Category|null=null
   categoryName:String=""
   productList:Product[]=[]
-
+  isAllProductReq:Boolean=false
   allProductReq:any= {  next:(response:any) =>this.allProductReqPocessing(response),                                                                      
                         error:(error:any) =>this.allProductReqError(error),
                         complete:()=>this.allProductReqComplete()}
@@ -42,7 +42,7 @@ export class ListProductsComponent {
   
   apiCall(category:String)
   {
-       
+       this.isAllProductReq=true
        this.menuApi
            .getProductsByCategory(category)
            .subscribe(this.allProductReq)
@@ -64,6 +64,7 @@ export class ListProductsComponent {
                       
   private allProductReqError(exception:any)
    {
+    this.isAllProductReq=false
     console.log("api error "+exception)
    }     
   
@@ -71,6 +72,7 @@ export class ListProductsComponent {
   
   private allProductReqComplete()
   {
+    this.isAllProductReq=false
     
     console.log("api completes ")
         

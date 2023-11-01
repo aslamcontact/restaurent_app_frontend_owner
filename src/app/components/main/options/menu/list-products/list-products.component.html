@@ -1,7 +1,15 @@
 <div class="container-fluid bg-white">
-        
-    <div class="row"  >
 
+  <div *ngIf="isAllProductReq"  class="text-center mt-3">
+    <div class="spinner-border" role="status">
+      <span class="sr-only"></span>
+    </div>
+</div>       
+        
+    <div class="row"  *ngIf="!isAllProductReq">
+            
+
+      
       <div  class="col-xs-4 col-sm-3 col-md-2 col-lg-2 card  bg-light text-dark m-1"
       *ngIf="!isEmptyCategory"
       (click)="openPopup()">
@@ -17,7 +25,8 @@
       </div>
       
                 <div  class="col-xs-4 col-sm-3 col-md-2 col-lg-2 card  bg-light  text-dark m-1" 
-                      *ngFor="let product of productList"> 
+                      *ngFor="let product of productList"
+                      > 
 
                       <div class="row mt-1">
                           <div class="col-10"></div>
