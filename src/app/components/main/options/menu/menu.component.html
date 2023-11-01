@@ -1,4 +1,4 @@
-<app-list-category (triggerListProduct)="prolist.apiCall($event)"></app-list-category>
+<app-list-category (triggerListProduct)="prolist.apiCall($event)" (isEmptyCategory)="prolist.categoryEmpty($event)"></app-list-category>
     
 
 <app-list-products #prolist></app-list-products>

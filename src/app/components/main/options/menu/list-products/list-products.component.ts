@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Category, MenuApiParserService, Product } from 'src/app/services/api/main/options/menu-api-parser.service';
 import { MenuApiService } from 'src/app/services/api/main/options/menu-api.service';
 
@@ -8,9 +8,8 @@ import { MenuApiService } from 'src/app/services/api/main/options/menu-api.servi
   styleUrls: ['./list-products.component.css']
 })
 export class ListProductsComponent {
-  @Output() triggerList=new EventEmitter<String>()
+  @Input() isEmptyCategory:boolean=false
   displayStyle:String = "none";
-
   category:Category|null=null
   categoryName:String=""
   productList:Product[]=[]
@@ -24,6 +23,7 @@ export class ListProductsComponent {
     
   }
 
+
   openPopup() { 
   
     this.displayStyle = "block"; 
@@ -34,9 +34,15 @@ export class ListProductsComponent {
     this.displayStyle=event
     this.apiCall(this.categoryName)
   }
-
+  categoryEmpty(event:any)
+  {
+       this.isEmptyCategory=event
+      if(this.isEmptyCategory===true) this.productList=[]
+  }
+  
   apiCall(category:String)
   {
+       
        this.menuApi
            .getProductsByCategory(category)
            .subscribe(this.allProductReq)
@@ -47,15 +53,7 @@ export class ListProductsComponent {
 
   private allProductReqPocessing(response:any)
   {
-    // this.listOfCategory=[]
-    // response.forEach((category:any)=> 
-                        // {
-                             
-                            // this.listOfCategory.push(new Category(category.name))
-                        // }
-                     //)
-
-    // console.log(JSON.stringify(this.listOfCategory))   
+    
      
       this.category= this.parser.apiToCategory(response)
       this.categoryName=this.category.getCategoryName()

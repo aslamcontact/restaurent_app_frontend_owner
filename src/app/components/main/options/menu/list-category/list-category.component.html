@@ -1,27 +1,29 @@
 
-<div class="sticky-top">
+<div class="sticky-top m-1">
 
-    <div class="container-fluid">   
+    <div class="container-fluid  " >   
 
        
       
-       <div class="overflow-auto  row flex-row mt-1 flex-nowrap  ">
+       <div class="overflow-auto row flex-row flex-nowrap cat-row p-1"
+         >
 
              
 
-           <div class="card  m-1  mb-3 btn btn-outline-warning  card-color" 
-                style="width: 11em;height: 15em; border-radius: 100;" 
+           <div class="card  card-design mb-1 btn btn-secondary m-1" 
+                style="width: 11em;height: 14em; border-radius: 100;" 
                 (click)="openPopup()">
-          
-                <p class="text-center h1 pt-5 " >
-                         +        
-                </p>                      
+                <img class="card-img-top img pb-1 img-design"  height="125" weight="30" 
+                src="../../../../../../assets/addimagegreen.jpg"
+                alt="Card image cap">
+               <h2 class='text-dark text-nowrap mt-1'>NEW</h2>
+               <h2 class='text-dark text-nowrap'>CATEGORY</h2>                
             </div>
 
         
           
-           <div class="card  btn btn-outline-light  mb-3 m-1 card-color"  
-                style="width: 11em;height: 15em; border-radius: 100;"
+           <div class="card  card-design btn btn-secondary  m-1  mb-1 "  
+                style="width: 11em;height: 14em; border-radius: 100;"
                 *ngFor="let category of listOfCategory"
                  (click)="sentToListCategory(category.getCategoryName())">
                 <div class="row">
@@ -35,26 +37,33 @@
 
                 </div>
 
-                 <div class="text-center m-1">
+                 <div class="text-center ">
                      
                         
                                      
-                     <img class="card-img-top img pb-1"  height="60" weight="30" 
+                     <img class="card-img-top img img-design"  height="60" weight="30" 
                           [src]="menuApi.getImage(category.getCategoryName(),'main')"
                           alt="Card image cap">
-                     <h2 class='text-dark text-nowrap'>{{category.getCategoryName()}}</h2>
-                       
+                     <div class='text-muted mt-2 h6 text-nowrap'>
+                      {{category.getCategoryName().toUpperCase()}}</div>
+                     <app-add-image 
+                     [categoryName]="category.getCategoryName()"
+                     [imageName]="'main'"
+                     (isSetImage)="apiCall()"></app-add-image>
                  </div>
                 
-                      <app-add-image 
-                        [categoryName]="category.getCategoryName()"
-                        [imageName]="'main'"
-                        (isSetImage)="apiCall()"></app-add-image>
+                     
                                             
                                            
            </div>
 
+          
+
            <div class="text-secondary mt-5 p-3" *ngIf="listOfCategory.length<=0">Empty Add New Category</div>
+           <div *ngIf="isAllCategoryReq"  class="text-center">
+            <div class="spinner-border" role="status">
+               <span class="sr-only"></span>
+          </div>
        </div>       
     </div>  
     

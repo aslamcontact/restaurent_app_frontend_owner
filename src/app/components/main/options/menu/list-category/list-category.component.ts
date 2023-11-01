@@ -11,9 +11,10 @@ import { MenuApiService } from 'src/app/services/api/main/options/menu-api.servi
 export class ListCategoryComponent {
 
   @Output() triggerListProduct=new EventEmitter<String>()
-
+  @Output() isEmptyCategory=new EventEmitter<Boolean>()
   displayStyle:String = "none"; 
   listOfCategory:Category[]=[]
+  isAllCategoryReq=false
   allCategoryReq:any= {  next:(response:any) =>this.menuCategoryReqPocessing(response),                                                                      
                          error:(error:any) =>this.menuCategoryReqError(error),
                          complete:()=>this.menuCategoryReqComplete()}
@@ -38,11 +39,14 @@ export class ListCategoryComponent {
   }
   apiCall()
   {
+    this.isAllCategoryReq=true
     this.menuApi.getAllCategory().subscribe(this.allCategoryReq)
+    
   }
   sentToListCategory(categoryName:String)
   {
     this.triggerListProduct.emit(categoryName)
+    this.isEmptyCategory.emit(false)
   }
 
 
@@ -63,6 +67,7 @@ export class ListCategoryComponent {
                       
   private menuCategoryReqError(exception:any)
    {
+    this.isAllCategoryReq=false
     console.log("api error "+exception)
    }     
   
@@ -70,9 +75,12 @@ export class ListCategoryComponent {
   
   private menuCategoryReqComplete()
   {
-    
+    this.isAllCategoryReq=false
     console.log("api completes ")
-        
+    if(this.listOfCategory.length>0)
+      this.sentToListCategory(this.listOfCategory[0].getCategoryName())
+    else
+       this.isEmptyCategory.emit(true)    
    
   }
 

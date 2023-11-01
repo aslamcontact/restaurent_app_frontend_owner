@@ -1,0 +1,49 @@
+.card-design {
+    
+    border-radius: 20px;
+    
+    background: #fafafcf5;
+    box-shadow: 0px 0px 0px 0px  #59a8a87c,
+                 0px 0px 0px 0px rgb(102, 87, 87);
+   
+}
+
+.cat-row{
+   
+    border-radius: 20px;
+    overflow-x: hidden;
+    background: #e6e6ebe8;
+    box-shadow: 0px 0px 0px 1px  #616d6d7c,
+                 0px 0px 0px 0px rgb(102, 87, 87);
+   
+
+}
+
+
+::-webkit-scrollbar{
+    display: none;
+  }
+
+   ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+    border-radius: 50px;
+    
+    
+}
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 5px 5px 9px rgb(170, 201, 226); 
+    border-radius: 50px;
+    width: 5px;
+    
+    
+    
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 30px;
+    height: 10px;
+    width: 20px;
+    -webkit-box-shadow: inset 0px 0px 6px rgba(5, 5, 5, 0.979); 
+}

@@ -3,7 +3,7 @@
     <div class="row"  >
 
       <div  class="col-xs-4 col-sm-3 col-md-2 col-lg-2 card  bg-light text-dark m-1"
-      
+      *ngIf="!isEmptyCategory"
       (click)="openPopup()">
       <img class="card-img-top img mt-3"  height="200em" width="250em" 
       src="../../../../../../assets/addImage2.jpg" alt="Card image cap">
