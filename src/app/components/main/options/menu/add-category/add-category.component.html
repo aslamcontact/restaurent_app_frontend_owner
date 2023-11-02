@@ -52,12 +52,16 @@
                 <h5 class="col-12">EACH CATEGORY ATLEAST HAVE ONE PRODUCT </h5>
               </div>
 
-              <div *ngIf="isCategoryReq"  class="text-center">
-                <div class="spinner-border" role="status">
-                   <span class="sr-only"></span>
-                </div>
-             </div>
-            
+              
+          
+              
+              <div *ngIf="isCategoryReq" class="text-center" style="padding-left: 45%;">
+                  <div class="spinner"> </div>
+              </div>
+                 
+              
+           
+          
              <div class="form-group row mb-3"  *ngIf="!isCategoryReq">
               
               <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 p-2">
