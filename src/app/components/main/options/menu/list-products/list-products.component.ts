@@ -8,11 +8,12 @@ import { MenuApiService } from 'src/app/services/api/main/options/menu-api.servi
   styleUrls: ['./list-products.component.css']
 })
 export class ListProductsComponent {
-  @Input() isEmptyCategory:boolean=false
+  @Input() isEmptyCategory:boolean=true
   displayStyle:String = "none";
   category:Category|null=null
   categoryName:String=""
   productList:Product[]=[]
+  apiError:String=""
   isAllProductReq:Boolean=false
   allProductReq:any= {  next:(response:any) =>this.allProductReqPocessing(response),                                                                      
                         error:(error:any) =>this.allProductReqError(error),
@@ -42,7 +43,8 @@ export class ListProductsComponent {
   
   apiCall(category:String)
   {
-       this.isAllProductReq=true
+       this.apiError=''
+              this.isAllProductReq=true
        this.menuApi
            .getProductsByCategory(category)
            .subscribe(this.allProductReq)
@@ -65,6 +67,7 @@ export class ListProductsComponent {
   private allProductReqError(exception:any)
    {
     this.isAllProductReq=false
+    this.apiError=exception
     console.log("api error "+exception)
    }     
   
